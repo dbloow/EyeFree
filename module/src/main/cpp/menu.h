@@ -17,6 +17,7 @@ void DrawMenu()
         if (BeginTabBar("Menu", tab_bar_flags)) {
             if (BeginTabItem(OBFUSCATE("Player Menu"))) {
                 Checkbox(OBFUSCATE("God Mode"), &cGod);
+                Checkbox(OBFUSCATE("Move"), &moved);
                 EndTabItem();
             }
             EndTabBar();
