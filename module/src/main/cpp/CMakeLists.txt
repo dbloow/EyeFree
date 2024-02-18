@@ -32,6 +32,7 @@ include_directories(Include)
 include_directories(Includes)
 include_directories(ImGui)
 include_directories(ImGui/backends)
+include_directories(ByNameModding)
 
 add_library(${MODULE_NAME}
         SHARED
