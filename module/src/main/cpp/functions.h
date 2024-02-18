@@ -19,10 +19,10 @@ void is_set_EnableWallHit(void *instance, bool value)
 {
     if (instance != NULL) {
         if(moved) {
-            value = true;
+            value = false;
         }
     }
-    return orig_set_EnableWallHit(instance, value);
+    orig_set_EnableWallHit(instance, value);
 }
 
 void (*orig_set_IgnoreHeight)(void *instance, bool value);
@@ -33,7 +33,7 @@ void is_set_IgnoreHeight(void *instance, bool value)
             value = true;
         }
     }
-    return orig_set_IgnoreHeight(instance, value);
+    orig_set_IgnoreHeight(instance, value);
 }
 
 
