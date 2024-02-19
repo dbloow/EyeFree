@@ -36,11 +36,12 @@ void is_set_IgnoreHeight(void *instance, bool value)
     orig_set_IgnoreHeight(instance, value);
 }
 
-void (*Orig_changeField)(void* instance, int fieldId, uint8_t roomType, uint8_t roomId, float basePos[], float angle, float cameraRot, void *emergency);
+void (*Orig_changeField)(void* instance, int fieldId, uint8_t roomType, uint8_t roomId, monoArray<float>* basePos, float angle, float cameraRot, void *emergency);
 
 void ready(){
-    Orig_changeField = (void(*)(void*,int, uint8_t, uint8_t, float[], float, float, void *))IL2Cpp::Il2CppGetMethodOffset(OBFUSCATE("Assembly-CSharp.dll"), OBFUSCATE(""), OBFUSCATE("GameManager"), OBFUSCATE("ChangeField"), 7);
+    Orig_changeField = (void(*)(void*,int, uint8_t, uint8_t, monoArray<float>*, float, float, void*))IL2Cpp::Il2CppGetMethodOffset(OBFUSCATE("Assembly-CSharp.dll"), OBFUSCATE(""), OBFUSCATE("GameManager"), OBFUSCATE("ChangeField"), 7);
 }
+
 
 void* gameManagerInstance = nullptr;
 
@@ -55,9 +56,11 @@ void is_GameManager_Update(void *instance){
 void ChangeField(int fieldId, float x, float y, float z) {
     if (gameManagerInstance != nullptr) {
         float basePos[3] = {x, y, z};
-        Orig_changeField(gameManagerInstance, fieldId, 0, 0, basePos, 0, 0, NULL);
+        monoArray<float>* m = monoArray<float>::Create(basePos,3);
+        Orig_changeField(gameManagerInstance, fieldId, 0, 0, m, 0, 0, NULL);
     }
 }
+
 
 
 

@@ -29,6 +29,7 @@
 
 
 
+
 namespace IL2Cpp {
 	void Il2CppAttach();
 	
@@ -43,115 +44,143 @@ namespace IL2Cpp {
 
 }
 
-template<typename T> struct Il2CppArray {
-    void *klass;
-    void *monitor;
-    void *bounds;
-    int max_length;
-    T m_Items[65535];
+//template<typename T> struct Il2CppArray {
+//    void *klass;
+//    void *monitor;
+//    void *bounds;
+//    int max_length;
+//    T m_Items[65535];
+//
+//    int getLength() {
+//        return max_length;
+//    }
+//
+//    T *getPointer() {
+//        return (T *)m_Items;
+//    }
+//
+//    T &operator[](int i) {
+//        return m_Items[i];
+//    }
+//
+//    T &operator[](int i) const {
+//        return m_Items[i];
+//    }
+//};
 
-    int getLength() {
-        return max_length;
-    }
+//template<typename T>
+//using Array = Il2CppArray<T>;
+//
+//struct Il2CppString {
+//    void *klass;
+//    void *monitor;
+//    int32_t length;
+//    uint16_t start_char;
+//
+//    const char *CString();
+//
+//    const wchar_t *WCString();
+//
+//    static Il2CppString *Create(const char *s);
+//    static Il2CppString *Create(const wchar_t *s, int len);
+//
+//    int getLength() {
+//        return length;
+//    }
+//};
 
-    T *getPointer() {
-        return (T *)m_Items;
-    }
+//typedef Il2CppString String;
+//
+//template<typename T> struct Il2CppList {
+//    void *klass;
+//    void *unk1;
+//    Il2CppArray<T> *items;
+//    int size;
+//    int version;
+//
+//    T *getItems() {
+//        return items->getPointer();
+//    }
+//
+//    int getSize() {
+//        return size;
+//    }
+//
+//    int getVersion() {
+//        return version;
+//    }
+//
+//    T &operator[](int i) {
+//        return items->m_Items[i];
+//    }
+//
+//    T &operator[](int i) const {
+//        return items->m_Items[i];
+//    }
+//};
 
-    T &operator[](int i) {
-        return m_Items[i];
-    }
+//template<typename T>
+//using List = Il2CppList<T>;
+//
+//template<typename K, typename V> struct Il2CppDictionary {
+//    void *klass;
+//    void *unk1;
+//    Il2CppArray<int **> *table;
+//    Il2CppArray<void **> *linkSlots;
+//    Il2CppArray<K> *keys;
+//    Il2CppArray<V> *values;
+//    int touchedSlots;
+//    int emptySlot;
+//    int size;
+//
+//    K *getKeys() {
+//        return keys->getPointer();
+//    }
+//
+//    V *getValues() {
+//        return values->getPointer();
+//    }
+//
+//    int getNumKeys() {
+//        return keys->getLength();
+//    }
+//
+//    int getNumValues() {
+//        return values->getLength();
+//    }
+//
+//    int getSize() {
+//        return size;
+//    }
+//};
 
-    T &operator[](int i) const {
-        return m_Items[i];
-    }
-};
+
+//template<typename K, typename V>
+//using Dictionary = Il2CppDictionary<K, V>;
+
+#include "2021.3.h"
 
 template<typename T>
-using Array = Il2CppArray<T>;
+struct monoArray : Il2CppObject  {
+    Il2CppArrayBounds *bounds;
+    il2cpp_array_size_t capacity;
+    T m_Items[0];
+    static monoArray<T> *Create(size_t capacity) {
+        auto monoArr = (monoArray<T> *)malloc(sizeof(monoArray) + sizeof(T) * capacity);
+        monoArr->klass = nullptr;
+        monoArr->capacity = capacity;
+        return monoArr;
+    }
 
-struct Il2CppString {
-    void *klass;
-    void *monitor;
-    int32_t length;
-    uint16_t start_char;
-
-    const char *CString();
-
-    const wchar_t *WCString();
-
-    static Il2CppString *Create(const char *s);
-    static Il2CppString *Create(const wchar_t *s, int len);
-
-    int getLength() {
-        return length;
+    static monoArray<T> *Create(T *arr, size_t size) {
+        monoArray<T> *monoArr = Create(size);
+        monoArr->klass = nullptr;
+        monoArr->copyFrom(arr, size);
+        return monoArr;
+    }
+    bool copyFrom(T *arr, il2cpp_array_size_t size) {
+        if (!this || size > capacity) return false;
+        memcpy(&m_Items[0], arr, size * sizeof(T));
+        return true;
     }
 };
-
-typedef Il2CppString String;
-
-template<typename T> struct Il2CppList {
-    void *klass;
-    void *unk1;
-    Il2CppArray<T> *items;
-    int size;
-    int version;
-
-    T *getItems() {
-        return items->getPointer();
-    }
-
-    int getSize() {
-        return size;
-    }
-
-    int getVersion() {
-        return version;
-    }
-
-    T &operator[](int i) {
-        return items->m_Items[i];
-    }
-
-    T &operator[](int i) const {
-        return items->m_Items[i];
-    }
-};
-
-template<typename T>
-using List = Il2CppList<T>;
-
-template<typename K, typename V> struct Il2CppDictionary {
-    void *klass;
-    void *unk1;
-    Il2CppArray<int **> *table;
-    Il2CppArray<void **> *linkSlots;
-    Il2CppArray<K> *keys;
-    Il2CppArray<V> *values;
-    int touchedSlots;
-    int emptySlot;
-    int size;
-
-    K *getKeys() {
-        return keys->getPointer();
-    }
-
-    V *getValues() {
-        return values->getPointer();
-    }
-
-    int getNumKeys() {
-        return keys->getLength();
-    }
-
-    int getNumValues() {
-        return values->getLength();
-    }
-
-    int getSize() {
-        return size;
-    }
-};
-
-template<typename K, typename V>
-using Dictionary = Il2CppDictionary<K, V>;

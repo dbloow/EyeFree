@@ -548,23 +548,27 @@ the resulting monoArray definition would be monoArray<void **> *players;
 To get the C array, call getPointer.
 To get the length, call getLength.
 */
-template <typename T>
-struct monoArray
-{
-    void* klass;
-    void* monitor;
-    void* bounds;
-    int   max_length;
-    void* vector [1];
-    int getLength()
-    {
-        return max_length;
-    }
-    T getPointer()
-    {
-        return (T)vector;
-    }
-};
+//template <typename T>
+//struct monoArray
+//{
+//    void* klass;
+//    void* monitor;
+//    void* bounds;
+//    int   max_length;
+//    void* vector [1];
+//    int getLength()
+//    {
+//        return max_length;
+//    }
+//    T getPointer()
+//    {
+//        return (T)vector;
+//    }
+//
+//    static monoArray<float> *Create(float pDouble[3], int i) {
+//        return nullptr;
+//    }
+//};
 
 /*
 This struct represents a C# string. Credits to caoyin.
@@ -634,26 +638,26 @@ If you need a list of strings, use monoString **.
 To get the C array, call getItems.
 To get the size of a monoList, call getSize.
 */
-template <typename T>
-struct monoList {
-    void *unk0;
-    void *unk1;
-    monoArray<T> *items;
-    int size;
-    int version;
-
-    T getItems(){
-        return items->getPointer();
-    }
-
-    int getSize(){
-        return size;
-    }
-
-    int getVersion(){
-        return version;
-    }
-};
+//template <typename T>
+//struct monoList {
+//    void *unk0;
+//    void *unk1;
+//    monoArray<T> *items;
+//    int size;
+//    int version;
+//
+//    T getItems(){
+//        return items->getPointer();
+//    }
+//
+//    int getSize(){
+//        return size;
+//    }
+//
+//    int getVersion(){
+//        return version;
+//    }
+//};
 
 /*
 This struct represents a Dictionary. In the dump, a Dictionary is defined as Dictionary`1.
@@ -672,38 +676,38 @@ To get the C array of values, call getValues.
 To get the number of keys, call getNumKeys.
 To get the number of values, call getNumValues.
 */
-template <typename K, typename V>
-struct monoDictionary {
-    void *unk0;
-    void *unk1;
-    monoArray<int **> *table;
-    monoArray<void **> *linkSlots;
-    monoArray<K> *keys;
-    monoArray<V> *values;
-    int touchedSlots;
-    int emptySlot;
-    int size;
-
-    K getKeys(){
-        return keys->getPointer();
-    }
-
-    V getValues(){
-        return values->getPointer();
-    }
-
-    int getNumKeys(){
-        return keys->getLength();
-    }
-
-    int getNumValues(){
-        return values->getLength();
-    }
-
-    int getSize(){
-        return size;
-    }
-};
+//template <typename K, typename V>
+//struct monoDictionary {
+//    void *unk0;
+//    void *unk1;
+//    monoArray<int **> *table;
+//    monoArray<void **> *linkSlots;
+//    monoArray<K> *keys;
+//    monoArray<V> *values;
+//    int touchedSlots;
+//    int emptySlot;
+//    int size;
+//
+//    K getKeys(){
+//        return keys->getPointer();
+//    }
+//
+//    V getValues(){
+//        return values->getPointer();
+//    }
+//
+//    int getNumKeys(){
+//        return keys->getLength();
+//    }
+//
+//    int getNumValues(){
+//        return values->getLength();
+//    }
+//
+//    int getSize(){
+//        return size;
+//    }
+//};
 
 int GetObscuredIntValue(uint64_t location){
     int cryptoKey = *(int *)location;

@@ -4,6 +4,6 @@ ext {
     moduleName = "EYEEYE"
     moduleAuthor = "EYEEYE"
     moduleDescription = "Imgu Mod Menu Toram AUTO UPDATE"
-    moduleVersion = "v1.0"
-    moduleVersionCode = 1
+    moduleVersion = "v2.0"
+    moduleVersionCode = 2
 }

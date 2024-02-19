@@ -211,21 +211,21 @@ const wchar_t* utf16_to_utf32(const UTF16* source, size_t len) {
     return output;
 }
 
-const char* Il2CppString::CString() {
-    return utf16_to_utf8(&this->start_char, this->length);
-}
-
-const wchar_t* Il2CppString::WCString() {
-    return utf16_to_utf32(&this->start_char, this->length);
-}
-
-Il2CppString *Il2CppString::Create(const char *s) {
-    return il2cpp_string_new(s);
-}
-
-Il2CppString *Il2CppString::Create(const wchar_t *s, int len) {
-    return il2cpp_string_new_utf16(s, len);
-}
+//const char* Il2CppString::CString() {
+//    return utf16_to_utf8(&this->start_char, this->length);
+//}
+//
+//const wchar_t* Il2CppString::WCString() {
+//    return utf16_to_utf32(&this->start_char, this->length);
+//}
+//
+//Il2CppString *Il2CppString::Create(const char *s) {
+//    return il2cpp_string_new(s);
+//}
+//
+//Il2CppString *Il2CppString::Create(const wchar_t *s, int len) {
+//    return il2cpp_string_new_utf16(s, len);
+//}
 
 void IL2Cpp::Il2CppAttach() {
 	void *IL2Cpp_Handle = nullptr;
