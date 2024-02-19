@@ -18,6 +18,9 @@ void DrawMenu()
             if (BeginTabItem(OBFUSCATE("Player Menu"))) {
                 Checkbox(OBFUSCATE("God Mode"), &cGod);
                 Checkbox(OBFUSCATE("Move"), &moved);
+                if(Button("Tele")) {
+                    ChangeField(11600);
+                }
                 EndTabItem();
             }
             EndTabBar();
