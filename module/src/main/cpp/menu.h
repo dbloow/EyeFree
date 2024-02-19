@@ -18,8 +18,8 @@ void DrawMenu()
             Checkbox(OBFUSCATE("God Mode"), &cGod);
             Checkbox(OBFUSCATE("Move"), &moved);
             if(CollapsingHeader(OBFUSCATE("Teleport")))  {
-                if(Button(OBFUSCATE("Tele to Scaro"), ImVec2(300.0f, 70.0f))) {
-                    ChangeField(11600, 143.30f, 12.70f, 65.20f);
+                if(Button(OBFUSCATE("First Time Visit1"), ImVec2(300.0f, 70.0f))) {
+                    ChangeField(3100, 65.2056655883789f, 16.100000381469727f, 21.418893814086914f);
                 }
             }
 
