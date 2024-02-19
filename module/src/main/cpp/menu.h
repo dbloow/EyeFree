@@ -19,8 +19,9 @@ void DrawMenu()
                 Checkbox(OBFUSCATE("God Mode"), &cGod);
                 Checkbox(OBFUSCATE("Move"), &moved);
                 if(Button("Tele")) {
-                    ChangeField(11600);
+                    ChangeField(11600, 143.30, 12.70, 65.20);
                 }
+                Text("This is address ChangeField : %p", IL2Cpp::Il2CppGetMethodOffset(OBFUSCATE("Assembly-CSharp.dll"), OBFUSCATE(""), OBFUSCATE("GameManager"), OBFUSCATE("ChangeField"), 7));
                 EndTabItem();
             }
             EndTabBar();
